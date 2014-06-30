@@ -29,7 +29,7 @@ GM.BystanderNameParts = {"Alfa",
 local PlayerMeta = FindMetaTable("Player")
 local EntityMeta = FindMetaTable("Entity")
 
-GM.BystanderWords = CreateClientConVar( "mu_bystandername_words", 1, FCVAR_ARCHIVE, "Number of words to generate for bystander name" )
+GM.BystanderWords = CreateClientConVar( "mu_bystandername_words", 2, FCVAR_ARCHIVE, "Number of words to generate for bystander name" )
 
 // adds a name to the bystander parts generation table
 function GM:AddBystanderNamePart(name)
