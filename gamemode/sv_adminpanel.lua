@@ -18,8 +18,11 @@ net.Receive("mu_adminpanel_details", function (length, ply)
 		local t = {}
 		t.player = ply:EntIndex() // can't send players via JSON
 		t.murderer = ply:GetMurderer()
+		t.stalker = ply:GetStalker()
 		t.murdererChance = ((ply.MurdererChance or 1) ^ tab.weightMul) / total
+		t.stalkerChance = ((ply.StalkerChance or 1) ^ tab.weightMul) / total
 		t.murdererWeight = ply.MurdererChance or 1
+		t.stalkerWeight = ply.StalkerChance or 1
 		tab.players[ply:EntIndex()] = t
 	end
 

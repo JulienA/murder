@@ -301,14 +301,38 @@ function GM:StartNewRound()
 		murderer = self.ForceNextMurderer
 		self.ForceNextMurderer = nil
 	end
+	
+	
+	local oldStalker
+  for k,v in pairs(players) do
+    if v:GetStalker() then
+      oldStalker = v
+    end
+  end
+  
+  local stalker
 
-	if IsValid(murderer) then
-		murderer:SetMurderer(true)
+  // get the weight multiplier
+  local weightMul = self.StalkerWeight:GetFloat()
+
+  // pick a random murderer, weighted
+  local rand = WeightedRandom()
+  for k, ply in pairs(players) do
+    rand:Add(ply.StalkerChance ^ weightMul, ply)
+    ply.StalkerChance = ply.StalkerChance + 1
+  end
+  stalker = rand:Roll()
+
+	if IsValid(stalker) then
+		stalker:SetStalker(true)
 	end
 	for k, ply in pairs(players) do
 		if ply != murderer then
 			ply:SetMurderer(false)
 		end
+		if ply != stalker then
+      ply:SetStalker(false)
+    end
 		ply:StripWeapons()
 		ply:KillSilent()
 		ply:Spawn()
@@ -323,6 +347,7 @@ function GM:StartNewRound()
 	end
 	local noobs = table.Copy(players)
 	table.RemoveByValue(noobs, murderer)
+	table.RemoveByValue(noobs, stalker)
 	local magnum = table.Random(noobs)
 	if IsValid(magnum) then
 		magnum:Give("weapon_mu_magnum")
