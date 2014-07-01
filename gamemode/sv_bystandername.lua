@@ -1,11 +1,11 @@
-GM.BystanderNameParts = {"Alfa",
-"Bravo",
-"Charlie",
-"Delta",
-"Echo",
-"Foxtrot",
-"Golf",
-"Hotel",
+GM.BystanderNameParts = {"Cornichon",
+"Bebert",
+"Nico",
+"Jim",
+"Bob",
+"Toby",
+"Gali",
+"Laora",
 "India",
 "Juliett",
 "Kilo",
@@ -75,7 +75,8 @@ function GM:LoadBystanderNames()
 end
 
 function EntityMeta:GenerateBystanderName()
-	local words = math.max(1, GAMEMODE.BystanderWords:GetInt())
+	//local words = math.max(1, GAMEMODE.BystanderWords:GetInt())
+	local words = 2
 	local name = GAMEMODE:GenerateName(words)
 	self:SetNWString("bystanderName", name)
 	self.BystanderName = name
