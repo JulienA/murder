@@ -4,4 +4,6 @@
 	"title"		"MurderTest"
 	"maps"		"^md_|^mu_|^murder_"
 	"menusystem"	"1"
+	"workshopid" "279298018"
+	"version"	"2"
 }
