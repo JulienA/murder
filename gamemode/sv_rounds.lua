@@ -309,26 +309,11 @@ function GM:StartNewRound()
       oldStalker = v
     end
   end
-  
-  local stalker
-
-  // get the weight multiplier
-  local weightMul = self.StalkerWeight:GetFloat()
-
-  // pick a random murderer, weighted
-  local rand = WeightedRandom()
-  for k, ply in pairs(players) do
-    rand:Add(ply.StalkerChance ^ weightMul, ply)
-    ply.StalkerChance = ply.StalkerChance + 1
-  end
-  stalker = rand:Roll()
 
   if IsValid(murderer) then
     murderer:SetMurderer(true)
   end
-	if IsValid(stalker) then
-		stalker:SetStalker(true)
-	end
+
 	for k, ply in pairs(players) do
 		if ply != murderer then
 			ply:SetMurderer(false)
@@ -350,11 +335,27 @@ function GM:StartNewRound()
 	end
 	local noobs = table.Copy(players)
 	table.RemoveByValue(noobs, murderer)
-	table.RemoveByValue(noobs, stalker)
 	local magnum = table.Random(noobs)
 	if IsValid(magnum) then
 		magnum:Give("weapon_mu_magnum")
 	end
+	
+	local stalker
+
+  // get the weight multiplier
+  local weightMul = self.StalkerWeight:GetFloat()
+
+  // pick a random murderer, weighted
+  local rand = WeightedRandom()
+  for k, ply in pairs(noobs) do
+    rand:Add(ply.StalkerChance ^ weightMul, ply)
+    ply.StalkerChance = ply.StalkerChance + 1
+  end
+  stalker = rand:Roll()
+  
+  if IsValid(stalker) then
+    stalker:SetStalker(true)
+  end
 
 	self.MurdererLastKill = CurTime()
 
