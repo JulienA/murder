@@ -17,3 +17,7 @@ end
 function PlayerMeta:GetStalker(bool)
 	return self.Stalker
 end
+
+function GM:PlayerFootstep(ply, pos, foot, sound, volume, filter)
+  self:FootstepsOnFootstep(ply, pos, foot, sound, 0, filter)
+end

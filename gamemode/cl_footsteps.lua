@@ -43,36 +43,34 @@ function GM:DrawFootprints()
 end
 
 function GM:AddFootstep(ply, pos, ang) 
-  if !ply:GetStalker() then
-  	ang.p = 0
-  	ang.r = 0
-  	local fpos = pos
-  	if ply.LastFoot then
-  		fpos = fpos + ang:Right() * 5
-  	else
-  		fpos = fpos + ang:Right() * -5
-  	end
-  	ply.LastFoot = !ply.LastFoot
-  
-  	local trace = {}
-  	trace.start = fpos
-  	trace.endpos = trace.start + Vector(0,0,-10)
-  	trace.filter = ply
-  	local tr = util.TraceLine(trace)
-  
-  	if tr.Hit then
-  
-  		local tbl = {}
-  		tbl.pos = tr.HitPos
-  		tbl.plypos = fpos
-  		tbl.foot = foot
-  		tbl.curtime = CurTime()
-  		tbl.angle = ang.y
-  		tbl.normal = tr.HitNormal
-  		local col = ply:GetPlayerColor()
-  		tbl.col = Color(col.x * 255, col.y * 255, col.z * 255)
-  		table.insert(FootSteps, tbl)
-  	end
+	ang.p = 0
+	ang.r = 0
+	local fpos = pos
+	if ply.LastFoot then
+		fpos = fpos + ang:Right() * 5
+	else
+		fpos = fpos + ang:Right() * -5
+	end
+	ply.LastFoot = !ply.LastFoot
+
+	local trace = {}
+	trace.start = fpos
+	trace.endpos = trace.start + Vector(0,0,-10)
+	trace.filter = ply
+	local tr = util.TraceLine(trace)
+
+	if tr.Hit then
+
+		local tbl = {}
+		tbl.pos = tr.HitPos
+		tbl.plypos = fpos
+		tbl.foot = foot
+		tbl.curtime = CurTime()
+		tbl.angle = ang.y
+		tbl.normal = tr.HitNormal
+		local col = ply:GetPlayerColor()
+		tbl.col = Color(col.x * 255, col.y * 255, col.z * 255)
+		table.insert(FootSteps, tbl)
 	end
 end
 
