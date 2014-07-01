@@ -23,7 +23,7 @@ GM.BystanderNameParts = {"Cornichon",
 "Whiskey",
 "X-ray",
 "Yankee",
-"Zulu"
+"Tamer"
 }
 
 local PlayerMeta = FindMetaTable("Player")
