@@ -323,6 +323,9 @@ function GM:StartNewRound()
   end
   stalker = rand:Roll()
 
+  if IsValid(murderer) then
+    murderer:SetMurderer(true)
+  end
 	if IsValid(stalker) then
 		stalker:SetStalker(true)
 	end
